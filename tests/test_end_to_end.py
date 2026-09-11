@@ -1,5 +1,6 @@
 import os
 import subprocess
+import sys
 
 import pytest
 
@@ -8,7 +9,7 @@ import pytest
 def run_cli():
     # Replace with the actual command to run the CLI
     command = [
-        "python", "src/cli.py",
+        sys.executable, "src/cli.py",
         "--primary", "data/sample_primary_mission.json",
         "--sim", "data/sample_simulated_flights.json",
         "--buffer", "50",

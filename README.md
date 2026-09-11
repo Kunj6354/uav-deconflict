@@ -58,13 +58,13 @@ Generated Files:
 
 report.json
 demo_paths.png
-demo_anim.mp4
+animation.mp4
 
 3. Visualization Samples
 
 Type:	        Description	Output
 Static 2D:	    XY plot of mission and simulated paths	demo_paths.png
-Animated 2D:    Time-evolving paths with conflict highlights	demo_anim.mp4
+Animated 2D:    Time-evolving paths with conflict highlights	animation.mp4
 Interactive 3D:	Rotatable Plotly view with time slider	demo_3d.html (optional)
 
 4. Testing

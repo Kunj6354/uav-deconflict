@@ -1,3 +1,4 @@
+import imageio_ffmpeg
 # src/deconflict/visualize.py
 
 from typing import List, Optional, Tuple
@@ -155,7 +156,9 @@ def animate_2d(primary_traj, sim_trajs, conflicts: Optional[List[int]] = None, d
 
     # Save or display the animation
     if save_path:
-        ani.save(save_path, writer='ffmpeg', dpi=300)
+        ffmpeg_path = imageio_ffmpeg.get_ffmpeg_exe()
+        plt.rcParams["animation.ffmpeg_path"] = ffmpeg_path
+        ani.save(save_path, writer="ffmpeg", dpi=300)
     plt.show()
 
 # Interactive 3D plot for UAV trajectories

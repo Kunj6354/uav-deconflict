@@ -58,12 +58,19 @@ def run_analysis(
         with report_path.open("w", encoding="utf-8") as f:
             json.dump({"status": status, "conflicts": conflicts}, f, indent=2)
 
-    # Optional animation using mission objects directly
+    # Optional visual evidence using mission objects directly.
     if animate:
+        visualize.plot_static_2d(
+            primary_traj=primary_mission,
+            sim_trajs=simulated_flights,
+            buffer_m=buffer,
+            show=False,
+            save_path="demo_paths.png",
+        )
         visualize.animate_2d(
             primary_traj=primary_mission,
             sim_trajs=simulated_flights,
-            conflicts=None,      # you can wire real conflict info later if needed
+            conflicts=None,
             dt_display=dt,
             save_path="animation.mp4",
         )

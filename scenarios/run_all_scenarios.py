@@ -1,6 +1,7 @@
 import json
 import os
 import subprocess
+import sys
 from pathlib import Path
 
 import pandas as pd
@@ -20,7 +21,7 @@ def run_scenario(scenario_file):
     report_file = output_dir / "report.json"
 
     command = [
-        "python", "src/cli.py",
+        sys.executable, "src/cli.py",
         "--primary", scenario["primary_mission_file"],
         "--sim", scenario["simulated_flights_file"],
         "--buffer", str(scenario.get("buffer", 50)),
@@ -42,6 +43,7 @@ def run_scenario(scenario_file):
 
 
 def run_all_scenarios():
+    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
     summary_data = []
 
     # Create a summary DataFrame to collect all results

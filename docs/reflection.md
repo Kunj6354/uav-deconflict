@@ -66,7 +66,7 @@ and decides whether the mission is **clear** or a **conflict**, with supporting 
     - Parses `--primary`, `--sim`, `--buffer`, `--dt`, `--out`, `--animate`.
     - Calls `analyze_mission(...)`.
     - Prints `CLEAR` or `CONFLICT DETECTED` and writes `report.json`.
-    - When `--animate` is set, also generates `demo_paths.png` and `demo_anim.mp4`.
+    - When `--animate` is set, also generates `demo_paths.png` and `animation.mp4`.
 
 This separation made it easy to test each layer (I/O, trajectories, conflict logic, CLI, visualization) independently.
 
@@ -157,7 +157,7 @@ Every AI-generated snippet was:
     - Process return code is 0.
     - Output contains `"clear"` or `"conflict"`.
     - `report.json` exists.
-    - Visual assets (e.g., `demo_paths.png`, `demo_anim.mp4`, where configured) are generated.
+    - Visual assets (e.g., `demo_paths.png`, `animation.mp4`, where configured) are generated.
 
 ### 4.3. Edge Cases Considered
 

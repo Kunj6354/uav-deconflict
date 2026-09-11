@@ -1,7 +1,7 @@
 # src/deconflict/temporal.py
 from __future__ import annotations
 
-from datetime import datetime
+from datetime import UTC, datetime
 from typing import Any, Dict, List
 
 import numpy as np
@@ -82,7 +82,7 @@ def check_spatiotemporal_conflicts(
             t_val = float(t_grid[idx])
             # We treat trajectory time as "seconds since epoch" for formatting;
             # tests only care that this is a valid ISO string, not the exact date.
-            t_iso = datetime.utcfromtimestamp(t_val).isoformat()
+            t_iso = datetime.fromtimestamp(t_val, UTC).isoformat()
 
             conflict_details: Dict[str, Any] = {
                 "flight_id": getattr(sim_traj, "flight_id", "unknown"),
