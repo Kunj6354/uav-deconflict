@@ -1,0 +1,9 @@
+{
+  "description": "Same traffic geometry with a larger separation threshold to exercise conflict reporting.",
+  "primary_mission_file": "data/sample_primary_mission.json",
+  "simulated_flights_file": "data/sample_simulated_flights.json",
+  "buffer": 200.0,
+  "dt": 1.0,
+  "expected_status": "conflict",
+  "animate": false
+}

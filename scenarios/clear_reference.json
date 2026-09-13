@@ -1,0 +1,9 @@
+{
+  "description": "Reference mission at the standard 50 m separation threshold.",
+  "primary_mission_file": "data/sample_primary_mission.json",
+  "simulated_flights_file": "data/sample_simulated_flights.json",
+  "buffer": 50.0,
+  "dt": 1.0,
+  "expected_status": "clear",
+  "animate": false
+}

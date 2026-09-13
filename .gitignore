@@ -22,3 +22,6 @@ report.json
 .vscode/
 .idea/
 *.swp
+
+# Local API-client state
+.fetch-client/

@@ -1,4 +1,9 @@
 import imageio_ffmpeg
+import matplotlib
+
+# Rendering is file-based; use a headless backend so tests and CLI
+# do not depend on a desktop Tcl/Tk installation.
+matplotlib.use("Agg")
 # src/deconflict/visualize.py
 
 from typing import List, Optional, Tuple
@@ -31,7 +36,7 @@ def plot_2d_paths(paths: List[Path2D]) -> None:
     plt.axis("equal")
     plt.title("Sample UAV & intruder paths (bootstrap demo)")
     plt.tight_layout()
-    plt.show()
+    plt.close(fig)
 
 # Static 2D plot for UAV trajectories and potential conflicts
 
@@ -94,7 +99,7 @@ def plot_static_2d(primary_traj, sim_trajs, buffer_m: Optional[float] = None, sh
     if save_path:
         plt.savefig(save_path, dpi=300)
     if show:
-        plt.show()
+        plt.close(fig)
 
 # Animate 2D paths with conflicts
 
@@ -159,7 +164,7 @@ def animate_2d(primary_traj, sim_trajs, conflicts: Optional[List[int]] = None, d
         ffmpeg_path = imageio_ffmpeg.get_ffmpeg_exe()
         plt.rcParams["animation.ffmpeg_path"] = ffmpeg_path
         ani.save(save_path, writer="ffmpeg", dpi=300)
-    plt.show()
+    plt.close(fig)
 
 # Interactive 3D plot for UAV trajectories
 

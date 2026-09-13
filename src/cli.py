@@ -1,5 +1,3 @@
-# src/cli.py
-
 from __future__ import annotations
 
 import argparse
@@ -18,47 +16,37 @@ def run_analysis(
     output_file: str | None,
     animate: bool,
 ) -> None:
-    """
-    High-level CLI entrypoint:
-    - Runs core deconfliction using JSON files via analyzer.analyze_mission
-    - Optionally saves a JSON report
-    - Optionally generates a 2D animation using the loaded mission objects
-    """
+    """Run strategic preflight UAV deconfliction from JSON inputs."""
 
-    # Load mission objects (for visualization / metadata only)
     primary_mission: PrimaryMission = io.load_sample_primary_mission(
-        primary_mission_file)
+        primary_mission_file
+    )
     simulated_flights: list[SimulatedFlight] = io.load_sample_simulated_flights(
         simulated_flights_file
     )
 
-    # Core conflict analysis still uses filenames (JSON-based)
-    status, conflicts = analyzer.analyze_mission(
+    status, report = analyzer.analyze_mission(
         primary_mission_file,
         simulated_flights_file,
         buffer,
         dt,
     )
 
-    # Console output
     if status == "clear":
         print("CLEAR")
     else:
+        conflicts = report.get("conflicts", [])
         print("CONFLICT DETECTED")
-
-    if status == "CONFLICT DETECTED":
         print(f"Conflicts found: {len(conflicts)}")
         for conflict in conflicts:
             print(conflict)
 
-    # Optional JSON report
     if output_file:
         report_path = Path(output_file)
         report_path.parent.mkdir(parents=True, exist_ok=True)
         with report_path.open("w", encoding="utf-8") as f:
-            json.dump({"status": status, "conflicts": conflicts}, f, indent=2)
+            json.dump(report, f, indent=2)
 
-    # Optional visual evidence using mission objects directly.
     if animate:
         visualize.plot_static_2d(
             primary_traj=primary_mission,
@@ -70,7 +58,7 @@ def run_analysis(
         visualize.animate_2d(
             primary_traj=primary_mission,
             sim_trajs=simulated_flights,
-            conflicts=None,
+            conflicts=report.get("conflicts", []),
             dt_display=dt,
             save_path="animation.mp4",
         )
@@ -109,7 +97,7 @@ def main() -> None:
     parser.add_argument(
         "--animate",
         action="store_true",
-        help="Generate a simple 2D animation of the mission and flights",
+        help="Generate static and animated 2D visual evidence",
     )
 
     args = parser.parse_args()

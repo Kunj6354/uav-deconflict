@@ -1,40 +1,35 @@
-# Demo Script & Shot List (No Voiceover)
+# Demo Script and Shot List (No Voiceover)
 
-This is a suggested flow for a 3–4 minute demo video **without** voiceover.
-You can use on-screen captions or minimal text overlays instead of narration.
+Suggested 3-4 minute demonstration of the supported strategic preflight workflow. Use short on-screen captions.
 
----
+## 1. Objective (0:00-0:20)
 
-## Shot 1 — Title & Objective (0:00–0:20)
+Show the title **UAV Deconflict** and a simple diagram of a planned path crossing simulated traffic. Caption: "Check a planned mission against scheduled flight paths before takeoff."
 
-**On Screen:**
+## 2. Inputs and project structure (0:20-0:50)
 
-- Title slide:
-  - Text: `UAV Strategic Deconfliction in Shared Airspace`
-  - Subtitle: `Pre-flight conflict checking in space and time`
-- Simple background image or diagram of multiple drones in shared airspace.
+Show `data/sample_primary_mission.json`, `data/sample_simulated_flights.json`, and the `src/deconflict/` modules. Note that all paths use one local Cartesian `x/y/z` frame in metres; the tool does not convert latitude/longitude.
 
-**Optional caption:**
+## 3. Clear run (0:50-1:35)
 
-- “This demo shows a local tool that checks if a planned drone mission is safe to fly against other scheduled flights.”
+From the repository root, run:
 
----
+```powershell
+python .\src\cli.py --primary .\data\sample_primary_mission.json --sim .\data\sample_simulated_flights.json --buffer 50 --dt 1 --out .\outputs\demo_clear.json
+```
 
-## Shot 2 — Project Structure Overview (0:20–0:40)
+Show `CLEAR` in the terminal and the JSON report with `"status": "clear"` and an empty conflicts list.
 
-**On Screen:**
+## 4. Conflict regression (1:35-2:20)
 
-- Editor or terminal view showing repo structure:
+Run:
 
-  ```text
-  src/deconflict/
-    models.py
-    io.py
-    traject.py
-    temporal.py
-    analyzer.py
-    visualize.py
-  src/cli.py
-  data/sample_primary_mission.json
-  data/sample_simulated_flights.json
-  ```
+```powershell
+python .\scenarios\run_all_scenarios.py
+```
+
+Show the two passing reference scenarios and `outputs/conflict_reference/report.json`. The conflict reference reuses the same traffic with a 200 m buffer and produces 37 sampled conflict entries in the accepted environment. Point out flight identity, sampled time, and separation in one entry.
+
+## 5. Visualization and limits (2:20-3:20)
+
+Run the CLI command from section 3 with `--animate` added to generate `demo_paths.png` and `animation.mp4`. Show the static path view and a short animation excerpt. Mention that the CLI checks horizontal separation and that an interactive 3D visualization utility exists in the Python package. Close by stating that this is a preflight tool, not a live telemetry or flight-control system.
