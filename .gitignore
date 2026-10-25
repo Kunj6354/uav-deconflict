@@ -25,3 +25,4 @@ report.json
 
 # Local API-client state
 .fetch-client/
+project_archive/
