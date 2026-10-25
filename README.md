@@ -41,8 +41,8 @@ docs/                         project documentation and closure record
 The accepted project environment uses **Python 3.13**. The dependency versions in `requirements.txt` are pinned to those used for acceptance. In PowerShell:
 
 ```powershell
-git clone https://github.com/Kunj6354/flybeast01.git
-cd flybeast01
+git clone https://github.com/Kunj6354/uav-deconflict.git
+cd uav-deconflict
 python -m venv .venv
 .\.venv\Scripts\Activate.ps1
 python -m pip install -r requirements.txt

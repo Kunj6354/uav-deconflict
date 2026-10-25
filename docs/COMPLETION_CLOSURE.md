@@ -4,8 +4,8 @@
 | --- | --- |
 | Canonical ID | `CAN-069` |
 | Canonical project name | UAV Deconflict |
-| Local repository | `D:\Project\udav\uav_deconflict` |
-| Remote repository | `https://github.com/Kunj6354/flybeast01.git` |
+| Local repository | `D:\Project\uav-deconflict` |
+| Remote repository | `https://github.com/Kunj6354/uav-deconflict.git` |
 | Product scope | Strategic preflight UAV trajectory deconfliction |
 | Final state | `100_PERCENT_COMPLETE` |
 
